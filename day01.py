@@ -23,7 +23,7 @@ lst=[1,'abc','sabnam',123]
 Students =["Ahan","Riya","Aryan","Khushi","Mahima","sunil","Neeta"]
 Attendance =["Ahan","Aryan","Khushi","mahima","Neeta"]
 
-stud = input ("Enter Student Name : ")
+stud = input ("Enter Student Name : ").title()
 
 if stud in Students:
     if stud not in Attendance:
