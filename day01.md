@@ -75,12 +75,30 @@ Constrains
 ex.[:5] 
 
 # List 
--list is a data type that contains diff ele of diff data types
+- list is a data type that contains diff ele of diff data types
 ```python
 lst =[1,"Abc","sabnam",45,44.5,True]
 ```
--indexing and slicing is same as the string
+- indexing and slicing is same as the string
 but the diff is tht the single ele is consider as single index
 
 # Dict 
--Dict is data type is data type which includes key-value pair
+- Dict is data type is data type which includes key-value pair
+- methods
+  - key.items()
+  - key.values ()
+  - key.items()
+
+# tuple
+- tuple is immutable (cannot make changes)
+- Methods
+  - count(value)	Returns the number of times a given value appears in the tuple
+  - index(value)	Returns the index of the first occurrence of a given value (raises error if not found)
+Examples
+```python
+t = (1, 2, 3, 2, 5, 2)
+
+t.count(2)     # 3   → 2 appears 3 times
+t.index(3)     # 2   → 3 is at index 2
+```
+
