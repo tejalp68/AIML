@@ -12,7 +12,7 @@ num =123
 str1 =str(num)
 print(str1)
 print(type(str1))
-
+#
 
 #List  
 lst=[1,'abc','sabnam',123]
