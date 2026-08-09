@@ -53,15 +53,34 @@ Constrains
 5. Cannot use Python keywords as variable names → class, if, for, etc. ❌
 
 **Data type in Python**
-int
-float
-string
-complex
-bool
-none type
+1. int
+2. float
+3. string
+4. complex
+5. bool
+6. none type
 
-list tuple range (seq types)
-dict(mapping)
-set,frozenset
-binary types
+7. list tuple range (seq types)
+8. dict(mapping)
+9. set,frozenset
+10. binary types
 
+# String 
+**Indexing**
+- Sarts from 0 from left
+- from right starts with -1
+
+**slicing**
+[ start : stop : step ]
+ex.[:5] 
+
+# List 
+-list is a data type that contains diff ele of diff data types
+```python
+lst =[1,"Abc","sabnam",45,44.5,True]
+```
+-indexing and slicing is same as the string
+but the diff is tht the single ele is consider as single index
+
+# Dict 
+-Dict is data type is data type which includes key-value pair
