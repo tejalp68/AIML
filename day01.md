@@ -1,2 +1,2 @@
 #why Python
-python
+*python*
