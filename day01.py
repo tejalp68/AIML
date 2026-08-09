@@ -12,10 +12,20 @@ num =123
 str1 =str(num)
 print(str1)
 print(type(str1))
-#
 
+#String indexing and slicing 
+str ="Hello this is a string in Python"
+
+print(str[0:7])
+print(str[2:])
+print(str[16:22])
 #List  
 lst=[1,'abc','sabnam',123]
+#list indexing and slicing 
+print(lst[1])
+print(lst[-1])
+print(lst[0:])
+print(lst[::-1])
 
 # Conditional Statements
 #if else block
