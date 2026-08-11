@@ -1,10 +1,10 @@
 '''
 Name : Tejal Dadaji Pagar
-Cohort : AIML & TEP cohort 2026
-Day : Sunday
-Date : 09/08/2026
-Description :This program covers variables & data types, typecasting(str to int, int to str, and using pandas to_numeric),
-string indexing/slicing, list indexing/slicing,if-else conditions to check student attendance, and for loop & while loop examples
+- Cohort : AIML & TEP cohort 2026
+- Day : Sunday
+- Date : 09/08/2026
+- Description :This program covers variables & data types, typecasting(str to int, int to str, and using pandas to_numeric),
+- string indexing/slicing, list indexing/slicing,if-else conditions to check student attendance, and for loop & while loop examples
 
 '''
 
