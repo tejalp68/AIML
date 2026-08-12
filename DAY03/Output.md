@@ -1,3 +1,7 @@
+# Sample Run
+
+Here's an example of the game being played from start to finish:
+
 ```
 I am thinking of a number between 1 and 20.
 I am thinking of a number between 1 and 20.
