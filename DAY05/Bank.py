@@ -1,3 +1,10 @@
+'''
+Name : Tejal Dadaji Pagar
+Cohort : AIML & TEP cohort 2026
+Day : Thursday
+Date : 13/08/2026
+Description : MiniProject
+'''
 class BankAccount:
     def __init__(self,owner,balance):
         self.owner =owner
