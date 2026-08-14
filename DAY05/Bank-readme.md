@@ -1,3 +1,10 @@
+```
+Name : Tejal Dadaji Pagar
+Cohort : AIML & TEP cohort 2026
+Day : Thursday
+Date : 13/08/2026
+Description : This file involves the work flow of miniproject - Bank.py
+```
 # Bank Account Program
 
 This is a simple Python program to manage a bank account. 
