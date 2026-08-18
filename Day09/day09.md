@@ -7,7 +7,7 @@
 
 '''
 
-## What is artificial neuron
+# What is artificial neuron
 
 ## AND Gate
 
