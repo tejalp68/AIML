@@ -20,4 +20,7 @@ Truth table of AND gate
 | 1   | 0   | 0   |
 | 1   | 1   | 1   |
 
+- this implies that and gate has a linear equation to solve like x1 and x2 --> Output(Y1)
+- this is linear problem
+
 ## xor problems
