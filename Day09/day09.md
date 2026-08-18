@@ -6,3 +6,18 @@ Date : 18/08/2026
 Description :This file covers basic of neurons,neural network ,xor example,gradient descent,loop functions,hyperparameter
 
 '''
+
+## What is artificial neuron
+
+## AND Gate
+
+Truth table of AND gate
+
+| x1  | x2  | y   |
+| --- | --- | --- |
+| 0   | 0   | 0   |
+| 0   | 1   | 0   |
+| 1   | 0   | 0   |
+| 1   | 1   | 1   |
+
+## xor problems
