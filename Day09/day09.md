@@ -24,3 +24,16 @@ Truth table of AND gate
 - this is linear problem
 
 ## xor problems
+
+Truth table of XOR gate
+
+| x1  | x2  | y   |
+| --- | --- | --- |
+| 0   | 0   | 0   |
+| 0   | 1   | 1   |
+| 1   | 0   | 1   |
+| 1   | 1   | 0   |
+
+- this implies that xor gate has combined equation which is equal to
+- ā.b + b^-.a which is not linear
+- so in that case we have to solve this problem 
