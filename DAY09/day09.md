@@ -25,7 +25,7 @@ A biological neuron has four main parts:
 | **Axon**                     | Carries the processed signal away from the cell body |
 | **Axon Terminals / Synapse** | Passes the signal to the next neuron                 |
 
-![Biological Neuron](Images/01_biological_neuron.png)
+![Biological Neuron](Images/01_biological_neuron.jpg)
 
 ---
 
