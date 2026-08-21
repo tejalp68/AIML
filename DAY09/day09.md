@@ -25,9 +25,7 @@ A biological neuron has four main parts:
 | **Axon**                     | Carries the processed signal away from the cell body |
 | **Axon Terminals / Synapse** | Passes the signal to the next neuron                 |
 
-![Biological Neuron](imgs/01_biological_neuron.png)
-
-**In short:** dendrites collect signals → the soma combines/processes them → if the combined signal is strong enough, the neuron "fires" → the axon sends the signal onward through the synapse to the next neuron.
+![Biological Neuron](Images/01_biological_neuron.png)
 
 ---
 
@@ -43,7 +41,7 @@ Researchers modeled this biological process mathematically, creating the **artif
 | Firing threshold     | Activation function     |
 | Axon output          | Output (y)              |
 
-![Artificial Neuron](imgs/02_artificial_neuron.png)
+![Artificial Neuron](Images/02_artificial_neuron.png)
 
 **Mathematically:**
 
@@ -85,7 +83,7 @@ A **single perceptron** can solve AND because you can draw **one straight line**
 
 Here, the `1`s and `0`s are arranged **diagonally**. No single straight line can separate them.
 
-![AND vs XOR](imgs/03_and_vs_xor.png)
+![AND vs XOR](Images/03_and_vs_xor.png)
 
 ### AND vs XOR — Key Comparison
 
@@ -104,7 +102,7 @@ Since one straight line can't separate XOR's outputs, we need **multiple neurons
 - Combining several such lines lets the network build a **non-linear decision region**, which correctly separates XOR's outputs.
 - This was the key discovery that led to modern deep neural networks: **stacking layers + non-linear activation functions = ability to solve non-linear problems.**
 
-![MLP solving XOR](imgs/04_mlp_xor.png)
+![MLP solving XOR](Images/04_mlp_xor.png)
 
 This is essentially _why neural networks exist_ — a single neuron is limited to linear problems; layers of neurons with non-linear activations let us model arbitrarily complex patterns.
 
@@ -123,7 +121,7 @@ Once a network has an architecture, it needs to **learn** the correct weights an
 
 Think of it as standing on a hill (the loss surface) in fog, and taking small steps downhill toward the lowest point (minimum loss).
 
-![Gradient Descent](imgs/06_gradient_descent.png)
+![Gradient Descent](Images/06_gradient_descent.png)
 
 ### The formula
 
@@ -151,7 +149,7 @@ This is exactly how a network "learns" the correct weights to solve problems lik
 
 An **activation function** decides whether a neuron should "fire" and how strongly. Without it, stacking layers would be pointless — multiple linear layers collapse into a single linear function, so the network could never learn non-linear patterns like XOR.
 
-![Activation Functions](imgs/05_activation_functions.png)
+![Activation Functions](Images/05_activation_functions.png)
 
 ### Types of Activation Functions
 
@@ -216,7 +214,7 @@ w_new = w_old − learning_rate × gradient
 - **Too large:** the network may overshoot the minimum, bounce around, or even diverge (loss increases instead of decreasing).
 - **Good learning rate:** steady, efficient convergence to the minimum loss.
 
-![Learning Rate Effect](imgs/07_learning_rate.png)
+![Learning Rate Effect](Images/07_learning_rate.png)
 
 ### Summary
 
