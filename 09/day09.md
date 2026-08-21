@@ -14,7 +14,7 @@
 
 ## 1. What is a Neuron?
 
-A **neuron** is the basic unit of the human nervous system. Billions of neurons in the brain connect to each other and pass electrical/chemical signals, allowing us to think, learn, and react.
+A **neuron** is the basic unit of the human nervous system Billions of neurons in the brain connect to each other and pass electrical/chemical signals, allowing us to think, learn, and react
 
 A biological neuron has four main parts:
 
