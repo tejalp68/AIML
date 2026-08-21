@@ -202,14 +202,15 @@ f(x) = α·x      if x ≤ 0    (α is a small constant, e.g. 0.01–0.1)
 
 ## 6. Learning Rate
 
-The **learning rate (lr)** is a hyperparameter that controls **how big a step** gradient descent takes toward the minimum loss.
+The **learning rate (lr)** is a hyperparameter that controls **how big a step** gradient descent takes toward the minimum loss
 
 ```
 w_new = w_old − learning_rate × gradient
+
 ```
 
 - **Too small:** the network learns very slowly, taking a huge number of steps/epochs to converge (or getting stuck).
-- **Too large:** the network may overshoot the minimum, bounce around, or even diverge (loss increases instead of decreasing).
+- **Too large:** the network may overshoot the minimum, bounce around, or even diverge (loss increases instead of decreasing) ,wil also increase cost and time wastage will happen here
 - **Good learning rate:** steady, efficient convergence to the minimum loss.
 
 ![Learning Rate Effect](Images/07_learning_rate.png)
