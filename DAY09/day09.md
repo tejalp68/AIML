@@ -119,8 +119,6 @@ Once a network has an architecture, it needs to **learn** the correct weights an
 3. Gradient Descent tells us **which direction** to change each weight to reduce that loss.
 4. We repeat this over and over until the loss is minimized.
 
-Think of it as standing on a hill (the loss surface) in fog, and taking small steps downhill toward the lowest point (minimum loss).
-
 ![Gradient Descent](Images/06_gradient_descent.png)
 
 ### The formula
@@ -218,23 +216,24 @@ w_new = w_old − learning_rate × gradient
 
 ### Summary
 
-| Learning Rate | Effect                                                       |
-| ------------- | ------------------------------------------------------------ |
-| Too small     | Very slow convergence, may get stuck before reaching minimum |
-| Too large     | Overshoots minimum, unstable, may diverge                    |
-| Well-tuned    | Fast, stable convergence                                     |
-
-In practice, learning rate is one of the most important hyperparameters to tune, and techniques like **learning rate schedules** or **adaptive optimizers** (Adam, RMSProp) are commonly used to adjust it automatically during training.
+| Learning Rate | Effect                                                                                             |
+| ------------- | -------------------------------------------------------------------------------------------------- |
+| Too small     | Very slow convergence, may get stuck before reaching minimum,also will increases cost,time wastage |
+| Too large     | Overshoots minimum, unstable, may diverge,goes beyond the limit                                    |
+| Well-tuned    | Fast, stable convergence                                                                           |
 
 ---
 
-## Summary — The Big Picture
+## The Big Picture
 
 1. **Biological neuron** → inspired the **artificial neuron (perceptron)**.
-2. A **single perceptron** can only solve **linearly separable** problems (like AND) — it fails on **XOR**.
-3. Stacking neurons into **layers (a neural network)** with **non-linear activation functions** allows solving non-linear problems like XOR.
-4. The network **learns** its weights using **gradient descent + backpropagation**, guided by a loss function.
-5. **Activation functions** (Sigmoid, Tanh, ReLU, Leaky ReLU, etc.) introduce the non-linearity needed for deep learning to work.
-6. The **learning rate** controls how fast/stable this learning process is.
 
-Together, these concepts form the foundation of every deep learning model in use today.
+2. A **single perceptron** can only solve **linearly separable** problems (like AND) — it fails on **XOR**.
+
+3. Stacking neurons into **layers (a neural network)** with **non-linear activation functions** allows solving non-linear problems like XOR.
+
+4. The network **learns** its weights using **gradient descent + backpropagation**, guided by a loss function.
+
+5. **Activation functions** (Sigmoid, Tanh, ReLU, Leaky ReLU, etc.) introduce the non-linearity needed for deep learning to work.
+
+6. The **learning rate** controls how fast/stable this learning process is.
