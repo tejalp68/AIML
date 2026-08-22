@@ -1,9 +1,16 @@
 # Day 11 
----
+
+'''
+
+- Name : Tejal Dadaji Pagar
+- Cohort : AIML & TEP cohort 2026
+- Day : Saturday
+- Date : 22/08/2026
+- Description : so this notebook is basically a hands-on tour of "how does an LLM actually work under the hood" — starting from generating text, all the way to tokenizers
+
+'''
 
 # LLM Working
-
-Okay so this notebook is basically a hands-on tour of "how does an LLM actually work under the hood" — starting from generating text, all the way to tokenizers, embeddings, and a tiny RAG pipeline at the end. Let me walk you through it the way I'd explain it to you directly.
 
 ## Setup
 
