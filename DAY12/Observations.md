@@ -62,3 +62,45 @@ No examples or demonstrations were given here — just a direct question. The mo
 
 ---
 # CHAT 2
+---
+
+1. Natural Language Query (Direct Answer)
+
+Input:
+
+what is the weather in pune
+
+Output:
+
+Pune right now is around 29°C with a shower, and today looks like a mix of
+sunny spells and occasional showers.
+The next few days stay pretty monsoon-y, with temperatures around 28–29°C
+and intermittent showers/thunderstorms.
+(Includes a 7-day forecast card: Sun 29°/22°, Mon 29°/23°, Tue 29°/22°,
+Wed 29°/23°, Thu 29°/23°, Fri 28°/24°, Sat 29°/26°, Sun 29°/26°)
+
+Observation: The model answered directly from a live weather lookup/tool integration, returning real-time data (current temperature, condition, hourly trend, and a multi-day forecast). No code or function was involved — this is a direct natural language → natural language response backed by an external data source (a weather tool/API called internally by the assistant).
+
+2. Code Generation Request (Function Simulation)
+
+Input:
+
+write a function to get_weather(city) and shows how it would call it for pune
+
+Output:
+
+python
+def get_weather(city):
+    # In a real program, you'd call a weather API here.
+    return f"The weather in {city} is sunny and 29°C."
+
+
+# Call the function for Pune
+weather = get_weather("Pune")
+print(weather)
+
+Result when run:
+
+The weather in Pune is sunny and 29°C.
+
+Observation: Here the request shifted from asking for live weather data to asking for code that demonstrates the concept. Since no real API key/tool was wired into the generated code, the model produced a stubbed/mocked function with a hard-coded return value rather than an actual API call. It correctly demonstrated the calling convention (get_weather("Pune")) and used Pune as the example city per the request, but explicitly noted that a real implementation would need an actual API call instead of hard-coded data. This shows the model's ability to translate a conceptual request into working, illustrative code while being transparent about its limitations.
