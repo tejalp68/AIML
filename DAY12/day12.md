@@ -10,6 +10,10 @@
 
 # Day 12
 
+# Prompting Techniques
+
+![ Prompting Types](prompting_types_overview.png)
+
 ## 1. Zero-Shot Prompting
 
 Asking the model to do a task with no examples given.
