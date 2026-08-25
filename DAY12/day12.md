@@ -36,6 +36,8 @@ Asking the model to reason step-by-step before giving the final answer.
 
 > "If a store has 10 apples and sells 4, then gets 6 more, how many apples does it have? Think step by step."
 
+![Chain of thought Prompting](chain_of_thought_age_example.png)
+
 ## 4. Zero-Shot Chain-of-Thought
 
 Just adding "think step by step" without giving examples.
@@ -108,7 +110,3 @@ Telling the model what NOT to do or include.
 **Example:**
 
 > "Write a product description, but do not use exaggerated marketing language."
-
----
-
-If you're working on a specific use case (coding, creative writing, data analysis, etc.), I can point you to which of these techniques would work best there.
