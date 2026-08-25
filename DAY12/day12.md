@@ -12,7 +12,7 @@
 
 # Prompting Techniques
 
-![ Prompting Types](prompting_types_overview.png)
+![ Prompting Types](Images/prompting_types_overview.png)
 
 ## 1. Zero-Shot Prompting
 
@@ -40,7 +40,7 @@ Asking the model to reason step-by-step before giving the final answer.
 
 > "If a store has 10 apples and sells 4, then gets 6 more, how many apples does it have? Think step by step."
 
-![Chain of thought Prompting](chain_of_thought_age_example.png)
+![Chain of thought Prompting](Images/chain_of_thought_age_example.png)
 
 ## 4. Zero-Shot Chain-of-Thought
 
