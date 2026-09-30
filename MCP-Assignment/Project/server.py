@@ -2,41 +2,28 @@ import base64
 import os
 import re
 from typing import Annotated
-from urllib.parse import unquote
 
 import requests
 from dotenv import load_dotenv
-from fpdf import FPDF
 from pydantic import Field
-from mcp.server import MCPServer
+from fastmcp import FastMCP
 
 load_dotenv()
 
-mcp = MCPServer("wiki-story")
-PDF_FOLDER = os.path.join(os.path.dirname(__file__), "stories")
-os.makedirs(PDF_FOLDER, exist_ok=True)
+mcp = FastMCP("wiki-story")
+STORY_FOLDER = os.path.join(os.path.dirname(__file__), "stories")
+os.makedirs(STORY_FOLDER, exist_ok=True)
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GITHUB_REPO = os.environ.get("GITHUB_REPO")
 
 
-def _clean(text):
-    # The built-in PDF font only supports basic characters, so replace the rest
-    return text.encode("latin-1", "replace").decode("latin-1")
-
-
-@mcp.tool()
-def fetch_wikipedia(
-    topic_or_url: Annotated[str, Field(description="A topic like 'Eiffel Tower' or a full Wikipedia URL")],
-) -> str:
-    """Fetch the text of a Wikipedia page. Use this first, then write a creative
-    story based on the returned text. Always keep the returned URL so it can be
-    passed to create_story_pdf later."""
-    if "wikipedia.org/wiki/" in topic_or_url:
-        title = unquote(topic_or_url.split("/wiki/")[-1])
-    else:
-        title = topic_or_url
-
+# RESOURCE: read-only data, no side effects
+@mcp.resource("wikipedia://{topic}")
+def wikipedia_page(topic: str) -> str:
+    """The plain text of a Wikipedia page. Use underscores for spaces,
+    e.g. wikipedia://Eiffel_Tower"""
+    title = topic.replace("_", " ")
     resp = requests.get(
         "https://en.wikipedia.org/w/api.php",
         params={
@@ -57,48 +44,40 @@ def fetch_wikipedia(
         return f"No Wikipedia page found for '{title}'"
 
     url = "https://en.wikipedia.org/wiki/" + page["title"].replace(" ", "_")
-    text = page["extract"][:6000]  # keep it short enough to read easily
-    return f"Title: {page['title']}\nURL: {url}\n\n{text}"
+    return f"Title: {page['title']}\nURL: {url}\n\n{page['extract'][:6000]}"
 
 
+# TOOL 1: save the story as a markdown file
 @mcp.tool()
-def create_story_pdf(
-    title: Annotated[str, Field(description="Topic of the story, e.g. 'Eiffel Tower'")],
+def create_story_md(
+    topic: Annotated[str, Field(description="Topic of the story, e.g. 'Eiffel Tower'. Used as the file name.")],
     story: Annotated[str, Field(description="The full story you wrote, based on the Wikipedia text")],
     wikipedia_url: Annotated[str, Field(description="The Wikipedia URL the story is based on")],
 ) -> str:
-    """Create a PDF containing the story title, the story, and the Wikipedia source URL.
-    Call this after writing the story. Returns the PDF filename."""
-    pdf = FPDF()
-    pdf.add_page()
+    """Create a markdown (.md) file named after the topic, containing the story and
+    the Wikipedia source URL. Returns the file name to use with push_to_github."""
+    content = f"# {topic}\n\n{story}\n\n---\n\nSource: {wikipedia_url}\n"
 
-    pdf.set_font("Helvetica", "B", 20)
-    pdf.multi_cell(0, 10, _clean(title), new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(5)
+    filename = re.sub(r"[^a-zA-Z0-9]+", "_", topic).strip("_") + ".md"
+    with open(os.path.join(STORY_FOLDER, filename), "w", encoding="utf-8") as f:
+        f.write(content)
 
-    pdf.set_font("Helvetica", "", 12)
-    pdf.multi_cell(0, 8, _clean(story), new_x="LMARGIN", new_y="NEXT")
-    pdf.ln(8)
-
-    pdf.set_font("Helvetica", "I", 10)
-    pdf.multi_cell(0, 6, _clean(f"Source: {wikipedia_url}"), new_x="LMARGIN", new_y="NEXT")
-
-    filename = re.sub(r"[^a-zA-Z0-9]+", "_", title).strip("_").lower() + ".pdf"
-    pdf.output(os.path.join(PDF_FOLDER, filename))
-    return f"PDF created: {filename}"
+    return f"Story saved: {filename}"
 
 
+# TOOL 2: push the markdown file to GitHub
 @mcp.tool()
 def push_to_github(
-    filename: Annotated[str, Field(description="Name of the PDF created earlier, e.g. 'eiffel_tower.pdf'")],
+    filename: Annotated[str, Field(description="Name of the markdown file created earlier, e.g. 'Eiffel_Tower.md'")],
 ) -> str:
-    """Push a story PDF to the 'stories' folder in the configured GitHub repo."""
+    """Push a story markdown file to the 'stories' folder in the configured GitHub repo.
+    Call this after create_story_md."""
     if not GITHUB_TOKEN or not GITHUB_REPO:
         return "GitHub is not configured. Set GITHUB_TOKEN and GITHUB_REPO in your .env file."
 
-    path = os.path.join(PDF_FOLDER, filename)
+    path = os.path.join(STORY_FOLDER, filename)
     if not os.path.exists(path):
-        return f"File '{filename}' not found. Create the PDF first."
+        return f"File '{filename}' not found. Create the story first."
 
     with open(path, "rb") as f:
         encoded = base64.b64encode(f.read()).decode()
@@ -122,13 +101,16 @@ def push_to_github(
     return f"Failed ({resp.status_code}): {resp.text}"
 
 
+# PROMPT: a reusable template the person picks on purpose
 @mcp.prompt()
 def wiki_story(topic: str) -> str:
-    """Reusable prompt template to turn a Wikipedia topic into a story PDF on GitHub."""
+    """Turn a Wikipedia topic into a short story saved as a markdown file on GitHub."""
     return (
-        f"Fetch the Wikipedia page for '{topic}', write a short creative story "
-        "based on its facts, save it as a PDF with the Wikipedia URL, "
-        "and push the PDF to GitHub."
+        f"Read the Wikipedia page for '{topic}' from the resource "
+        f"wikipedia://{topic.replace(' ', '_')}. Write a short, creative story "
+        "that stays true to the facts on that page. Then call create_story_md "
+        "with the topic, the story, and the Wikipedia URL from the page, "
+        "and finally call push_to_github with the returned file name."
     )
 
 
