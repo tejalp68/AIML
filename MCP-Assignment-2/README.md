@@ -2,30 +2,22 @@
 
 > All data in this repo is **mock data** created for a assignment. Nothing here is a real quote, plan or medical/insurance advice.
 
-## 1. Company
-
-**Decent** ([decent.com](https://www.decent.com/)) is an AI-native health insurance brokerage for small businesses. It prices every way to cover a team (standard fully insured plans, and ICHRA, where the company gives each employee a monthly amount to buy their own plan), helps the owner pick one, and reviews claims data year-round instead of only at renewal.
-**Users:** small-business owners and the employees who end up with the plan.
-
-## 2. The problem this server solves
+## The problem this server solves
 
 With an **ICHRA**, the owner's job gets easier but the _employee's_ job gets harder: they receive, say, $450/month and must shop for their own plan among dozens of options, most of which they can't compare. As far as I could tell from the public site, Decent's pitch speaks mainly to the business owner, so the employee side step is the gap this server targets.
 
 **What it does:** an employee asks their AI assistant _"I get $450 a month, what should I pick?"_ and the assistant can look up their real allowance, list the plans sold in their zip code, estimate their yearly cost per plan, answer specific questions from the carrier documents ("is metformin covered?", "do I need a referral?"), and hand off to a human Decent advisor when it shouldn't guess.
 
-### Why MCP and not just paste the data into Claude?
+---
 
-For a one-off question, pasting works. MCP earns its place here because:
+project layout
 
-| Need                                            | Pasting                                                        | This server                                                |
-| ----------------------------------------------- | -------------------------------------------------------------- | ---------------------------------------------------------- |
-| Employee's real, current allowance and deadline | Employee types it from memory                                  | Fetched live by `get_employee_allowance`                   |
-| Plan documents                                  | A full evidence-of-coverage packet floods the context (see §7) | RAG tool returns only the 3 relevant passages              |
-| Taking an action                                | Impossible                                                     | `flag_for_advisor` creates a ticket for a human            |
-| Same behaviour for every employee               | Everyone pastes something different                            | One server, same tools and rules for all                   |
-| Access control                                  | Whole spreadsheets pasted into chats                           | Server decides what each call can return (see Limitations) |
+Decent-mcp
+|-
+|
+|\_
 
-## 3. Tools, resources and prompts (and why)
+---
 
 ### Tools (5): things the model _does_
 
@@ -49,8 +41,6 @@ For a one-off question, pasting works. MCP earns its place here because:
 - `explain_this_plan(plan_id)`: jargon-free explanation under 150 words.
 - `compare_two_plans(plan_a, plan_b, employee_id)`: side-by-side at low/medium/high usage.
 
-**Kept deliberately small:** five tools, each doing one job, rather than ten half-working ones.
-
 ## 4. How to run
 
 ```bash
@@ -61,4 +51,30 @@ pip install -r requirements.txt
 
 python server.py                        # stdio (what Claude Desktop / Cursor launch)
 python server.py --transport http       # HTTP at http://127.0.0.1:8000/mcp
+```
+
+Host comaprison:
+Claude: claude working is fast as claude was completing task fast and returning fast answers also in claude it was little bit easy to config the server with claude
+
+vscode copilot: this is bit slow when it came to completing tasks ,but benefit of this that we code in vscode and then instantly we can tell it to complete the task
+
+#### Workflow: where this fits in Decent's process
+
+```
+Employer sets ICHRA allowance ──► Enrollment window opens ──► Employee gets enrollment email
+        (Decent / employer)                                          │
+                                                                     ▼
+                                              Employee opens their AI assistant ── pick_my_plan
+                                                                     │
+                       ┌─────────────────────────────────────────────┤
+                       ▼                                             ▼
+        get_employee_allowance → list_plans →            Anything medical / legal / unclear
+        estimate_yearly_cost → search_plan_documents                 │
+                       │                                             ▼
+                       ▼                                   flag_for_advisor (ticket)
+        Employee picks a plan and enrolls ◄── human Decent advisor follows up
+                       │
+                       ▼
+        Employee submits premium receipts → employer reimburses up to the allowance
+
 ```
